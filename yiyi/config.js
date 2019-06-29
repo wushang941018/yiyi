@@ -15,14 +15,19 @@ const PRO_CONFIG = {
     DB_NAME: "yiyi"
 };
 
-const IS_WINDOWS = process.env.SystemRoot.toLowerCase().includes('windows');
+const IS_WINDOWS = process.env.SystemRoot.toLowerCase().includes("windows");
 
 const DB_CONFIG = IS_WINDOWS ? DEV_CONFIG : PRO_CONFIG;
 
 module.exports = {
     ...DB_CONFIG,
+
     // 服务器监听端口
     PORT: 5666,
+
+    TINIFY_KEY: "znXiiFlylfivtQ4fi5BDJi0Hl6ao2stX",
+
+    OUTER_NET_IP: "http://118.25.122.145:5666",
 
     HTTP_ROOT: "http://localhost:5666",
     UPLOAD_DIR: path.resolve(__dirname, "./static/upload")

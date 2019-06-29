@@ -12,6 +12,9 @@ class Carousel {
             let { id } = ctx.params;
             try {
                 let data = await CarouselModel.search(ctx, id);
+                data.forEach(item => {
+                    item.img_src = ctx.MY_CONFIG.OUTER_NET_IP + item.img_src;
+                });
                 ctx.body = {
                     message: "success",
                     payLoad: {
@@ -37,11 +40,9 @@ class Carousel {
     static async add(ctx) {
         let { id } = ctx.params;
         let { file, name } = ctx.request.fields;
-        let src = file[0].path.replace(/\\/g, '/');
-        src = src.substr(src.indexOf('/upload/'))
         let params = {
             type: id,
-            src: src,
+            src: file,
             name
         };
         try {
@@ -61,7 +62,7 @@ class Carousel {
         let { id } = ctx.params;
         try {
             let src = await CarouselModel.delete(ctx, id);
-            fs.unlink(src);
+            ctx.deleteImg(src);
             ctx.body = {
                 message: "success",
                 payLoad: "删除成功"

@@ -20,11 +20,11 @@ class Goods {
                 _.forEach(item, ({ c_id, img_src, case_desc, type }) => {
                     let info = {
                         id: c_id,
-                        src: img_src
+                        src: ctx.MY_CONFIG.OUTER_NET_IP + img_src
                     };
-                    if (type === 2){
+                    if (type === 2) {
                         info.desc = case_desc;
-                        info.src = JSON.parse(img_src);
+                        info.src = JSON.parse(img_src).map(src => ctx.MY_CONFIG.OUTER_NET_IP + src);
                     }
                     type === 1 ? fileList.push(info) : caseList.push(info);
                 });
@@ -95,7 +95,7 @@ class Goods {
             let srcList = await GoodsModel.delete(ctx, id);
 
             _.forEach(srcList, ({ img_src }) => {
-                fs.unlink(img_src);
+                ctx.deleteImg(img_src);
             });
             ctx.body = {
                 message: "success",

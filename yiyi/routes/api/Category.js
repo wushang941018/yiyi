@@ -11,6 +11,7 @@ class Category {
             let payLoad = [];
             let childrenList = [];
             data.forEach(item => {
+                item.img_src = ctx.MY_CONFIG.OUTER_NET_IP + item.img_src;
                 if (item.p_id !== 0) return childrenList.push(item);
                 item.children = [];
                 payLoad.push(item);
@@ -81,9 +82,7 @@ class Category {
             };
             return false;
         }
-        let src = file[0].path.replace(/\\/g, '/');
-        src = src.substr(src.indexOf('/upload/'))
-        let params = { id, name, src: src}
+        let params = { id, name, src: file };
         try {
             let data = await CategoryModel.addTwo(ctx, params);
             ctx.body = {

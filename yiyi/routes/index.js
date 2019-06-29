@@ -30,7 +30,7 @@ router.delete("/goods/:id", Goods.delete);
 router.post("/upload", ctx => {
     let { file } = ctx.request.fields;
     let src = file[0].path.replace(/\\/g, '/');
-        src = src.substr(src.indexOf('/upload/'))
+    src = src.substr(src.indexOf('/upload/'))
     ctx.body = {
         message: "success",
         payLoad: src
