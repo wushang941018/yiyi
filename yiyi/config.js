@@ -15,7 +15,9 @@ const PRO_CONFIG = {
     DB_NAME: "yiyi"
 };
 
-const IS_WINDOWS = process.env.SystemRoot.toLowerCase().includes("windows");
+const OS = process.env.OS;
+
+const IS_WINDOWS = OS && OS.toLowerCase().includes("windows");
 
 const DB_CONFIG = IS_WINDOWS ? DEV_CONFIG : PRO_CONFIG;
 
