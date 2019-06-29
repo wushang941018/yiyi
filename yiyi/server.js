@@ -35,7 +35,7 @@ server.context.db = require("./libs/database");
 
 server.context.MY_CONFIG = config;
 
-server.context.deleteImg = config;
+server.context.deleteImg = deleteImg;
 
 function deleteImg(imgName) {
     let filePath = path.join(__dirname, "./static/" + imgName);
