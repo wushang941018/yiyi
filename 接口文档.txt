@@ -1,0 +1,242 @@
+首页
+
+----轮播
+---------------------------------    
+    获取
+    /carousel/{id}  GET (id: 1、首页轮播;2、首页类目轮播)
+    -------------------------
+    res
+    {
+        message: "success",
+        errorMsg: "请填写类目名",
+        payLoad: {
+            data: [
+                {
+                    id: 1,
+                    src: 'https://f12.baidu.com/it/u=2465775762,1509670197&fm=72',
+                    name: '风景图'
+                },
+                {
+                    id: 2,
+                    src: 'https://f12.baidu.com/it/u=2465775762,1509670197&fm=72',
+                    name: '风景图'
+                },
+            ],
+            total: 99
+        }
+    }
+---------------------------------   
+    添加
+    /carousel/{id}  POST (id: 1、首页轮播;2、首页类目轮播)
+    -------------------------
+    req
+    {
+        file: file1, //required 图片文件对象
+        name: "类目名1" // id为1时可不传
+    }
+    -------------------------
+    res
+    {
+        message: "success",
+        errorMsg: "请填写类目名"
+    }
+---------------------------------   
+    删除
+    /carousel/{id}  DELETE (id: 后台返回的id)
+    -------------------------
+    res
+    {
+        message: "success",
+        errorMsg: "删除失败，请稍后再试"
+    }
+
+上传图片获取地址  仅同时添加一级类目二级类目和添加产品时使用
+    /upload POST
+    req 
+    {file: file1}
+    res
+    {
+        message: "success",
+        errorMsg: "添加失败",
+        payLoad: "图片地址"
+    }
+
+类目
+----添加
+    /category  POST
+    req
+    {
+        type: 1, // required 1、只添加一级类目; 2、只添加二级类目; 3、同时添加一级和二级类目
+        name: '类目一', // required 类目名
+        id: 1, // 仅当type为2时必填, 值为所属类目一的id
+        file: file1, // 当type为2时必填, 为二级类目的图片对象
+        children: [ // 仅当type为3时必填, 包含二级类目信息
+            {
+                name: '类目二名字', // 二级类目名字
+                src: "后台返回的图片路径"
+            }
+        ]
+    }
+    res
+    {
+        message: "success",
+        errorMsg: "添加失败",
+    }
+
+----获取
+    /category  GET
+    res
+    {
+        message: "success",
+        errorMsg: "添加失败",
+        payLoad: {
+            data: [
+                {
+                    id: 1,
+                    name: "一级类目名",
+                    children: [
+                        {
+                            id: 4,
+                            name: "二级类目名",
+                            pId: 1, //所属一级类目名 以后可能用得到
+                            src: "二级类目图片地址"
+                        },
+                        {
+                            id: 5,
+                            name: "二级类目名",
+                            pId: 1, //所属一级类目名 以后可能用得到
+                            src: "二级类目图片地址"
+                        },
+                    ]
+                },
+                {
+                    id: 2,
+                    name: "一级类目名",
+                    children: [
+                        {
+                            id: 8,
+                            name: "二级类目名",
+                            pId: 2, //所属一级类目名 以后可能用得到
+                            src: "二级类目图片地址"
+                        },
+                        {
+                            id: 9,
+                            name: "二级类目名",
+                            pId: 2, //所属一级类目名 以后可能用得到
+                            src: "二级类目图片地址"
+                        },
+                    ]
+                }
+            ]
+        }
+    }
+
+
+公司信息
+-------获取
+    /companyInfo  GET 
+    res
+    {
+        message: "success",
+        errorMsg: "获取失败",
+        payLoad: {
+            contacts: "联络人",
+            telephone: "电话号码",
+            mobilePhone: "手机号码",
+            address: "公司地址",
+            corporateCulture: "企业文化",
+            serviceTarget: "服务对象"
+        }
+    }
+-------编辑
+    /companyInfo  PUT 
+    //上传字段为空字符串时将被设置为空
+    req
+    {
+        contacts: "联络人",
+        telephone: "电话号码",
+        mobilePhone: "手机号码",
+        address: "公司地址",
+        corporateCulture: "企业文化",
+        serviceTarget: "服务对象"
+    }
+    res
+    {
+        message: "success",
+        errorMsg: "编辑失败"
+    }
+
+
+产品
+----添加
+    /goods  POST
+    req
+    {
+        desc: '产品描述', // required 类目名
+        id: 8, // required 所属二级类目的id
+        fileList: [  // required  产品图片信息
+            {
+                src: "后台返回的图片路径" 
+            },
+            {
+                src: "产品图片地址" 
+            },
+        ],
+        caseList: [ // required  案例信息 可以是空数据
+            {
+                src: ["后台返回的图片路径1", "后台返回的图片路径2"],
+                desc: "案例描述"
+            },
+            {
+                src: ["后台返回的图片路径1", "后台返回的图片路径2"],
+                desc: "案例描述"
+            },
+        ]
+    }
+
+    res
+    {
+        message: "success",
+        errorMsg: "添加失败",
+    }
+
+----获取
+    /goods/${id}  GET id为二级类目id
+    req
+    {
+        message: "success",
+        errorMsg: "获取失败",
+        payLoad: {
+            data: [
+                {
+                    desc: '产品描述',
+                    id: 1, // 产品id
+                    fileList: [  // 产品图片信息
+                        {
+                            src: "产品图片地址"
+                        },
+                        {
+                            src: "产品图片地址" 
+                        },
+                    ],
+                    caseList: [ //  案例信息
+                        {
+                            src: ["案例图片地址1", "案例图片地址2"],
+                            desc: "案例描述"
+                        },
+                        {
+                            src: ["案例图片地址1", "案例图片地址2"],
+                            desc: "案例描述"
+                        },
+                    ]
+                }
+            ]
+        } 
+    }
+
+----删除
+    /goods/{id}  DELETE  id为产品id
+    {
+        message: "success",
+        errorMsg: "删除失败"
+    }
