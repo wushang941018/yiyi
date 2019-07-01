@@ -74,7 +74,7 @@ class Category {
         let { id, name, src } = ctx.request.fields;
         let errorList = [];
         if (!id) errorList.push("id");
-        if (!file) errorList.push("src");
+        if (!src) errorList.push("src");
         if (errorList.length) {
             ctx.body = {
                 message: "error",
