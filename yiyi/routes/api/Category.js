@@ -71,10 +71,10 @@ class Category {
     }
 
     static async addTwo(ctx) {
-        let { id, name, src } = ctx.request.fields;
+        let { id, children } = ctx.request.fields;
         let errorList = [];
         if (!id) errorList.push("id");
-        if (!src) errorList.push("src");
+        if (!children) errorList.push("children");
         if (errorList.length) {
             ctx.body = {
                 message: "error",
@@ -82,7 +82,7 @@ class Category {
             };
             return false;
         }
-        let params = { id, name, src };
+        let params = { id, children };
         try {
             let data = await CategoryModel.addTwo(ctx, params);
             ctx.body = {
