@@ -1,7 +1,0 @@
-apps:
-  - script: /root/yiyi/server.js
-    name: yiyi
-    env_production:
-      NODE_ENV: production
-      HOST: localhost
-      PORT: 5666
