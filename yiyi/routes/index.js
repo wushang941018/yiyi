@@ -33,7 +33,10 @@ router.post("/upload", ctx => {
     src = src.substr(src.indexOf('/upload/'))
     ctx.body = {
         message: "success",
-        payLoad: src
+        payLoad: {
+            url: ctx.MY_CONFIG.OUTER_NET_IP + src,
+            src
+        }
     }
 });
 
