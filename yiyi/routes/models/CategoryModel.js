@@ -8,8 +8,12 @@ class CategoryModel {
         let data = await db.query(`INSERT INTO category_table(name) VALUE(?)`, name);
         return data;
     }
-    static async addTwo({ db }, {id, name, src}) {
-        let data = await db.query(`INSERT INTO category_table(p_id, name, img_src) VALUE(?, ?, ?)`, [id, name, src]);
+    static async addTwo({ db }, {id, children}) {
+        children = children.map(item => {
+            return `(${id}, "${item.name}", "${item.src}")`;
+        })
+        let str = children.join(",");
+        let data = await db.query(`INSERT INTO category_table(p_id, name, img_src) VALUE ${str}`);
         return data;
     }
     static async addOneAndTwo({ db }, { name, children}) {
@@ -19,7 +23,7 @@ class CategoryModel {
             return `(${id}, "${item.name}", "${item.src}")`;
         })
         let str = children.join(",");
-        let data = await db.query(`INSERT INTO category_table( p_id, name, img_src) VALUE ${str}`, );
+        let data = await db.query(`INSERT INTO category_table( p_id, name, img_src) VALUE ${str}`);
         return data;
     }
 }
