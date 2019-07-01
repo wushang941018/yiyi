@@ -42,7 +42,7 @@ class Category {
         let { type, name } = ctx.request.fields;
         let errorList = [];
         if (!type) errorList.push("type");
-        if (!name) errorList.push("name");
+        if (type !== 2 && !name) errorList.push("name");
         if (errorList.length) {
             ctx.body = {
                 message: "error",
@@ -78,7 +78,7 @@ class Category {
         if (errorList.length) {
             ctx.body = {
                 message: "error",
-                payLoad: `param ${errorList.join(" and ")} is required when type = 2`
+                payLoad: `param ${errorList.join(" and ")} is required when type = 3`
             };
             return false;
         }
