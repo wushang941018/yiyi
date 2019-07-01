@@ -39,10 +39,10 @@ class Carousel {
          */
     static async add(ctx) {
         let { id } = ctx.params;
-        let { file, name } = ctx.request.fields;
+        let { src, name } = ctx.request.fields;
         let params = {
             type: id,
-            src: file,
+            src,
             name
         };
         try {
