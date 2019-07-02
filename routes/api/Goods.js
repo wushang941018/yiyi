@@ -24,7 +24,11 @@ class Goods {
                     };
                     if (type === 2) {
                         info.desc = case_desc;
-                        info.src = JSON.parse(img_src).map(src => ctx.MY_CONFIG.OUTER_NET_IP + src);
+                        info.src = JSON.parse(img_src)
+                                    .map(item => { 
+                                        item.src = ctx.MY_CONFIG.OUTER_NET_IP + item.src; 
+                                        return item;
+                                    });
                     }
                     type === 1 ? fileList.push(info) : caseList.push(info);
                 });
