@@ -15,7 +15,7 @@ class Company {
 
             ctx.body = {
                 message: "success",
-                payLoad: {}
+                payLoad: payLoad
             }
         } catch (e) {
             ctx.body = {
