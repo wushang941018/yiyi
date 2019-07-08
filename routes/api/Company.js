@@ -12,7 +12,7 @@ class Company {
                     payLoad[newKey] = value;
                 }
             }
-
+            payLoad.logoSrc = ctx.MY_CONFIG.OUTER_NET_IP + payLoad.logoSrc;
             ctx.body = {
                 message: "success",
                 payLoad: payLoad
