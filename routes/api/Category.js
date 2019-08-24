@@ -11,7 +11,7 @@ class Category {
             let payLoad = [];
             let childrenList = [];
             data.forEach(item => {
-                item.img_src = ctx.MY_CONFIG.OUTER_NET_IP + item.img_src;
+                item.img_src = ctx.MY_CONFIG.OUTER_NET_IP + (item.img_src || "/upload/upload_6ee63c36e0aa099442a57e0b7e2dba38.jpg");
                 if (item.p_id !== 0) return childrenList.push(item);
                 item.children = [];
                 payLoad.push(item);
