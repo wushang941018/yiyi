@@ -20,7 +20,7 @@ class Goods {
                 _.forEach(item, ({ c_id, img_src, case_desc, type }) => {
                     let info = {
                         id: c_id,
-                        src: ctx.MY_CONFIG.OUTER_NET_IP + img_src
+                        src: ctx.MY_CONFIG.OUTER_NET_IP + (img_src || "/upload/upload_6ee63c36e0aa099442a57e0b7e2dba38.jpg")
                     };
                     if (type === 2) {
                         info.desc = case_desc;
