@@ -29,7 +29,7 @@ module.exports = {
 
     TINIFY_KEY: "znXiiFlylfivtQ4fi5BDJi0Hl6ao2stX",
 
-    OUTER_NET_IP: "http://118.25.122.145:5666",
+    OUTER_NET_IP: "https://www.longoyiyi.com",
 
     HTTP_ROOT: "http://localhost:5666",
     UPLOAD_DIR: path.resolve(__dirname, "./static/upload")
